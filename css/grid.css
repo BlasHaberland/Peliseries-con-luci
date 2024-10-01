@@ -1,0 +1,5 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); /* Hace que las columnas se adapten */
+    gap: 20px; /* Añade un espacio entre las tarjetas */
+}

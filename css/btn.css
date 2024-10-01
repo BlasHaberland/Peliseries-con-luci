@@ -1,0 +1,14 @@
+.btn{
+    margin-left: 5px;
+}
+
+.btn-success{
+    background-color: #a9da88 !important;
+    border: none;
+    color: rgb(0, 0, 0);
+}
+
+.btn-danger{
+    background-color: #ec6363 !important;
+    color: rgb(0, 0, 0);
+}

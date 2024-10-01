@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 100px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff4ce;
+    display: flex;
+    /* Usar flexbox para centrar verticalmente */
+    align-items: center;
+    /* Centrar verticalmente */
+    justify-content: center;
+    /* Centrar horizontalmente */
+
+}
+
+body {
+    background-color: #ffa492;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+}
+
+.card-score {
+    font-weight: 800;
+}
