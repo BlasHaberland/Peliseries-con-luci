@@ -1,13 +1,48 @@
-// Variables
-const container = document.getElementById('container')
+// VARIABLES
+const container = document.getElementById('container');
 
-//Eventos
+const categoria = document.getElementById('categoria');
+const tema = document.getElementById('tema');
+const puntaje = document.getElementById('puntaje');
+const repetir = document.getElementById('repetir');
+
+const busqueda = {
+    titulo: '',
+    portada: '',
+    descripcion: '',
+    categoria: '',
+    tema: '',
+    puntaje: '',
+    repetir: ''
+}
+
+// EVENTOS
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarPeliseries();
+    mostrarPeliseries(peliseries);
 })
 
-//Funciones
-function mostrarPeliseries() {
+categoria.addEventListener('change', e => {
+    busqueda.categoria = e.target.value;
+    filtrarPeliserie();
+})
+tema.addEventListener('change', e => {
+    busqueda.tema = e.target.value;
+    filtrarPeliserie();
+})
+puntaje.addEventListener('change', e => {
+    busqueda.puntaje = parseInt(e.target.value);
+    filtrarPeliserie();
+})
+repetir.addEventListener('change', e => {
+    busqueda.repetir = parseInt(e.target.value);
+    console.log(busqueda)
+    filtrarPeliserie();
+})
+
+// FUNCIONES
+function mostrarPeliseries(peliseries) {
+    container.innerHTML = '';
+
     peliseries.forEach((peliserie, index) => {
 
         // Crea el elemento card
@@ -41,54 +76,30 @@ function mostrarPeliseries() {
         categoria.classList.add('categoria');
         categoria.textContent = `Categoria: ${peliserie.categoria}`;
 
+        // Temas
+        const temas = document.createElement('p');
+        temas.classList.add('tema')
+        temas.textContent = `Temas: ${peliserie.tema}`;
+
         // Crear el puntaje de la película
         const score = document.createElement('p');
         score.classList.add('card-score');
         score.textContent = `Puntaje: ${peliserie.puntaje}/5`;
 
-        // Crear botón "Volver a ver"
-        const volverVerButton = document.createElement('a');
-        volverVerButton.href = '#';
-        volverVerButton.classList.add('btn', 'btn-success'); // Cambié la clase para darle estilo
-        volverVerButton.textContent = 'Volver a ver';
-
-        // Evento para cambiar el valor de "repetir" y agregar clase "text-bg-success"
-        volverVerButton.addEventListener('click', () => {
-            // Cambiar el valor de "repetir" en la base de datos
-            peliseries[index].repetir = 1;
-
-            // Agregar clase "text-bg-success" a la card
-            card.classList.remove('text-bg-light');
-            card.classList.add('text-bg-success');
-
-            volverVerButton.style.display = 'none';
-            noVolverVerButton.style.display = 'inline-block';
-        });
-
-        // Crear botón "No volver a ver"
-        const noVolverVerButton = document.createElement('a');
-        noVolverVerButton.href = '#';
-        noVolverVerButton.classList.add('btn', 'btn-danger'); // Cambié la clase para darle estilo
-        noVolverVerButton.textContent = 'No volver a ver';
-        noVolverVerButton.style.display = 'none'
-
-        noVolverVerButton.addEventListener('click', () => {
-            // Cambiar el valor de "repetir" en la base de datos
-            peliseries[index].repetir = 0;
-
-            // Quitar la clase "text-bg-success" de la card
-            card.classList.remove('text-bg-success');
-            card.classList.add('text-bg-light');
-
-            noVolverVerButton.style.display = 'none';
-            volverVerButton.style.display = 'inline-block';
-        });
 
         if (peliserie.repetir === 1) {
             card.classList.remove('text-bg-light');
             card.classList.add('text-bg-success'); // Agregar clase si repetir es 1
-            volverVerButton.style.display = 'none'; // Ocultar botón "Volver a ver"
-            noVolverVerButton.style.display = 'inline-block'; // Mostrar botón "No volver a ver"
+        }
+
+        if (peliserie.repetir === 2) {
+            card.classList.remove('text-bg-light');
+            card.classList.add('text-bg-danger'); // Agregar clase si repetir es 1
+        }
+
+        if (peliserie.repetir === '') {
+            card.classList.remove('text-bg-light');
+            card.classList.add('text-bg-light'); // Agregar clase si repetir es 1
         }
 
 
@@ -96,9 +107,8 @@ function mostrarPeliseries() {
         cardBody.appendChild(title);
         cardBody.appendChild(description);
         cardBody.appendChild(categoria)
+        cardBody.appendChild(temas);
         cardBody.appendChild(score);
-        cardBody.appendChild(volverVerButton);
-        cardBody.appendChild(noVolverVerButton);
 
         // Agrega la imagen y el cuerpo de la card al contenedor de la card
         card.appendChild(img);
@@ -109,3 +119,38 @@ function mostrarPeliseries() {
 
     });
 }
+
+function filtrarPeliserie() {
+    const resultado = peliseries.filter(filtrarCategoria).filter(filtrarTema).filter(filtrarPuntaje).filter(filtrarRepetir)
+    console.log(resultado);
+    mostrarPeliseries(resultado);
+}
+
+function filtrarCategoria(peliserie) {
+    if (busqueda.categoria) {
+        return peliserie.categoria === busqueda.categoria;
+    }
+    return peliserie;
+}
+
+function filtrarTema(peliserie) {
+    if (busqueda.tema) {
+        return peliserie.tema.includes(busqueda.tema);
+    }
+    return peliserie;
+}
+
+function filtrarPuntaje(peliserie) {
+    if (busqueda.puntaje) {
+        return peliserie.puntaje === busqueda.puntaje;
+    }
+    return peliserie;
+}
+
+function filtrarRepetir(peliserie) {
+    if (busqueda.repetir) {
+        return peliserie.repetir === busqueda.repetir;
+    }
+    return peliserie;
+}
+

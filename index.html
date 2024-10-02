@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/grid.css">
     <link rel="stylesheet" href="/css/btn.css">
+    <link rel="stylesheet" href="/css/filter.css">
     <title>Peliseries con Luci</title>
 
 </head>
@@ -18,9 +19,46 @@
     <header>
         Peliseries con Luci
     </header>
+    <!-- Filtros -->
+    <div class="filter">
+        <label for="categoria">Categoria: </label>
+        <select name="" id="categoria">
+            <option value="">Cualquiera</option>
+            <option value="serie">serie</option>
+            <option value="pelicula">pelicula</option>
+        </select>
+
+        <label for="tema"> Tema:</label>
+        <select name="" id="tema">
+            <option value="">Todos</option>
+            <option value="fantasia">Fantasia</option>
+            <option value="terror">Terror</option>
+            <option value="aventura">Aventura</option>
+            <option value="animacion">Animacion</option>
+            <option value="cienciaFiccion">Sciencia Ficcion</option>
+        </select>
+
+        <label for="puntaje"> puntaje:</label>
+        <select name="" id="puntaje">
+            <option value="">Todos</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <label for="repetir"> Volver a ver:</label>
+        <select name="" id="repetir">
+            <option value="">Todos</option>
+            <option value="1">Volver a ver</option>
+            <option value="2">No volver a ver</option>
+        </select>
+
+    </div>
+
+    <!-- Peliseries -->
     <div class="container" id="container">
-
-
     </div>
 
     <script src="/js/db.js"></script>
