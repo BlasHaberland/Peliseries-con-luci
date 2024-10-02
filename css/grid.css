@@ -1,5 +1,22 @@
-.container{
+.container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); /* Hace que las columnas se adapten */
-    gap: 20px; /* Añade un espacio entre las tarjetas */
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    /* Hace que las columnas se adapten */
+    gap: 20px;
+    /* Añade un espacio entre las tarjetas */
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); /* Cards más pequeñas en pantallas pequeñas */
+        /* Una sola columna */
+        justify-items: center;
+        /* Centra las cards horizontalmente */
+    }
+
+    .card {
+        width: 100%; /* Asegura que la card ocupe el ancho máximo permitido */
+        max-width: 14rem; /* Define un tamaño máximo para que no se estiren demasiado */
+        padding: 10px; /* Ajusta el padding para hacerlas más compactas */
+    }
 }

@@ -18,6 +18,12 @@ header {
 
 }
 
+@media (max-width: 415px) {
+    header {
+        font-size: 30px;
+    }
+}
+
 body {
     background-color: #ffa492;
     font-family: 'Roboto', sans-serif;
@@ -33,7 +39,7 @@ body {
     font-weight: 800;
 }
 
-.tema{
+.tema {
     color: #e092be;
     font-weight: 800;
 }
