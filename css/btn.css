@@ -1,14 +1,29 @@
-.btn{
+.btn {
     margin-left: 5px;
 }
 
-.btn-success{
-    background-color: #a9da88 !important;
-    border: none;
-    color: rgb(0, 0, 0);
+
+.btn-primary {
+    background-color: #ceb774;
+    border: 1px solid #ceb774;
+    color: #000000;
 }
 
-.btn-danger{
-    background-color: #ec6363 !important;
-    color: rgb(0, 0, 0);
+.btn-primary:hover {
+    transition: 2ms;
+    background-color: #edd692;
+    border: 1px solid #eacf7f;
+    color: #000000;
+}
+
+.btn-primary.active {
+    background-color: #edd692;
+    border: 1px solid #eacf7f;
+    color: #000000;
+}
+
+.btn-primary.active:hover {
+    transition: 2ms;
+    border: 1px solid #f5e3ad;
+    color: #000000;
 }

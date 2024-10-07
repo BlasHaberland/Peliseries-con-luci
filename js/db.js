@@ -1,6 +1,7 @@
 //1 repetir
 //2 no repetir
 //3 neutro
+
 const peliseries = [
     {
         titulo: 'El eterno resplandor de una mente sin recuerdos',
@@ -165,8 +166,31 @@ const peliseries = [
         tema: ['accion'],
         puntaje: 4,
         repetir: 1,
-    }
+    },
 
-
+    {
+        titulo: 'El Joker',
+        portada: 'https://hips.hearstapps.com/hmg-prod/images/joker-poster-imax-1568799403.jpg',
+        descripcion: 'Arthur Fleck adora hacer reír a la gente, pero su carrera como comediante es un fracaso. El repudio social, la marginación y una serie de trágicos acontecimientos lo conducen por el sendero de la locura y, finalmente, cae en el mundo del crimen.',
+        categoria: 'pelicula',
+        tema: ['drama', 'suspenso'],
+        puntaje:5,
+        repetir:1,
+    },
 
 ];
+
+//CUERPO
+/*
+
+{
+titulo:'',
+portada:'',
+descripcion:''.
+categoria:'',
+tema: ['',''],
+puntaje:,
+repetir:,
+},
+
+*/
