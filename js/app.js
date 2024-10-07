@@ -5,6 +5,9 @@ const categoria = document.getElementById('categoria');
 const tema = document.getElementById('tema');
 const puntaje = document.getElementById('puntaje');
 const repetir = document.getElementById('repetir');
+let paginaActual = 1;
+const pelisPorPagina = 12;
+
 
 const busqueda = {
     titulo: '',
@@ -42,8 +45,12 @@ repetir.addEventListener('change', e => {
 // FUNCIONES
 function mostrarPeliseries(peliseries) {
     container.innerHTML = '';
+    console.log("entro");
+    const start = (paginaActual - 1) * pelisPorPagina;
+    const end = start + pelisPorPagina;
+    const peliseriesPagina = peliseries.slice(start, end); // Solo selecciona los elementos de la página actual
 
-    peliseries.forEach((peliserie, index) => {
+    peliseriesPagina.forEach((peliserie, index) => {
 
         // Crea el elemento card
         const card = document.createElement('div');
@@ -82,24 +89,25 @@ function mostrarPeliseries(peliseries) {
         temas.textContent = `Temas: ${peliserie.tema}`;
 
         // Crear el puntaje de la película
-        const score = document.createElement('p');
-        score.classList.add('card-score');
-        score.textContent = `Puntaje: ${peliserie.puntaje}/5`;
+        const puntuacion = document.createElement('p');
+        puntuacion.classList.add('card-puntuacion');
+        puntuacion.textContent = `Puntaje: ${peliserie.puntaje}/5`;
 
 
+        //Color segun se repita la peliserie
         if (peliserie.repetir === 1) {
             card.classList.remove('text-bg-light');
-            card.classList.add('text-bg-success'); // Agregar clase si repetir es 1
+            card.classList.add('text-bg-success'); 
         }
 
         if (peliserie.repetir === 2) {
             card.classList.remove('text-bg-light');
-            card.classList.add('text-bg-danger'); // Agregar clase si repetir es 1
+            card.classList.add('text-bg-danger'); 
         }
 
         if (peliserie.repetir === '') {
             card.classList.remove('text-bg-light');
-            card.classList.add('text-bg-light'); // Agregar clase si repetir es 1
+            card.classList.add('text-bg-light'); 
         }
 
 
@@ -108,7 +116,7 @@ function mostrarPeliseries(peliseries) {
         cardBody.appendChild(description);
         cardBody.appendChild(categoria)
         cardBody.appendChild(temas);
-        cardBody.appendChild(score);
+        cardBody.appendChild(puntuacion);
 
         // Agrega la imagen y el cuerpo de la card al contenedor de la card
         card.appendChild(img);
@@ -118,12 +126,43 @@ function mostrarPeliseries(peliseries) {
         container.appendChild(card);
 
     });
+
+    mostrarBotonesPaginacion(peliseries.length);
 }
+
+
+function mostrarBotonesPaginacion(pelisTotales) {
+    const totalPages = Math.ceil(pelisTotales / pelisPorPagina);
+    const paginationContainer = document.getElementById('pagination'); // Asegúrate de tener este contenedor en el HTML
+
+    paginationContainer.innerHTML = ''; // Limpia los botones anteriores
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.classList.add('btn', 'btn-primary', 'm-1');
+
+        if( paginaActual === i){
+            button.classList.add('active')
+        }
+
+        // Establece la página actual al hacer clic
+        button.addEventListener('click', () => {
+            paginaActual = i;
+            mostrarPeliseries(peliseries); // Actualiza la página
+        });
+
+        paginationContainer.appendChild(button);
+    }
+}
+
+//Filtrados
 
 function filtrarPeliserie() {
     const resultado = peliseries.filter(filtrarCategoria).filter(filtrarTema).filter(filtrarPuntaje).filter(filtrarRepetir)
     console.log(resultado);
     mostrarPeliseries(resultado);
+    mostrarBotonesPaginacion(resultado.length);
 }
 
 function filtrarCategoria(peliserie) {
